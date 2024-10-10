@@ -2,6 +2,7 @@ from django.shortcuts import redirect
 from django.http import HttpResponse, JsonResponse, HttpResponseNotFound, Http404
 from django.utils.text import slugify
 from django.urls import reverse
+# from django.views.decorators.csrf import csrf_exempt
 import json
 
 from .dummy_data import gadgets
@@ -26,6 +27,7 @@ def single_gadget_slug_view(request, gadget_slug):
         return JsonResponse(gadget_match)
     raise Http404()
 
+# @csrf_exempt
 def single_gadget_post_view(request):
     if request.method == "POST":
         try:
@@ -35,6 +37,3 @@ def single_gadget_post_view(request):
         except Exception:
             return HttpResponse('Ällabätsch')
     return HttpResponse('Ällabätsch')
-
-# http://localhost:8000/tech_gadgets/gadget/send_gadget
-# http://localhost:8000/tech_gadgets/gadget/send_gadget/
