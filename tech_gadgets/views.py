@@ -10,7 +10,7 @@ from .dummy_data import gadgets
 # Create your views here.
 
 def start_page_view(request):
-    return render(request, 'tech_gadgets/test.html')
+    return render(request, 'tech_gadgets/test.html', {'gadget_list': gadgets})
 
 class RedirectToGadgetView(RedirectView):
     pattern_name="gadget_slug_url"
