@@ -1,4 +1,4 @@
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from django.http import HttpResponse, JsonResponse, HttpResponseNotFound, Http404
 from django.utils.text import slugify
 from django.urls import reverse
@@ -10,7 +10,7 @@ from .dummy_data import gadgets
 # Create your views here.
 
 def start_page_view(request):
-    return HttpResponse("läuft!")
+    return render(request, 'tech_gadgets/test.html')
 
 class RedirectToGadgetView(RedirectView):
     pattern_name="gadget_slug_url"
