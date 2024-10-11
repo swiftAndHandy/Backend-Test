@@ -3,6 +3,7 @@ from django.http import HttpResponse, JsonResponse, HttpResponseNotFound, Http40
 from django.utils.text import slugify
 from django.urls import reverse
 from django.views import View
+from django.views.generic.base import RedirectView
 import json
 
 from .dummy_data import gadgets
@@ -10,6 +11,15 @@ from .dummy_data import gadgets
 
 def start_page_view(request):
     return HttpResponse("läuft!")
+
+class RedirectToGadgetView(RedirectView):
+    pattern_name="gadget_slug_url"
+    def get_redirect_url(self, *args, **kwargs):
+        slug = slugify(gadgets[kwargs.get("gadget_id", 0)]['name'])
+        kwargs.pop("gadget_id", None)
+        kwargs["gadget_slug"] = slug
+        return super().get_redirect_url(*args, **kwargs)
+    
 
 def single_gadget_int_view(request, gadget_id):
     if len(gadgets) > gadget_id:
